@@ -27,6 +27,45 @@
     <script defer src="${pageContext.request.contextPath}/public/js/functions.js"></script>
   </head>
 
+  <script type="text/javascript">
+  	function checkMember() {
+  		
+  		var regExpId=/^[a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+  		var regExpPasswd=/^[0-9]*$/;
+  		var regExpPhone=/^\d{3}-\d{3,4}-\d{4}$/;
+  		var regExpEmail=/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  		
+  		var form=document.Member;
+  		
+  		var id = form.id.value;
+  		var pw = form.pw.value;
+  		var phone = form.phone1.value + "-" + form.phone2.value + "-" + form.phone3.value;
+  		var email=form.email.value;
+  		
+  		if (!regExpId.test(id)) {
+  			alert("아이디는 문자로 시작해주세요!");
+  			form.id.select();
+  			return;
+  		}
+  		
+  		if (!regExpName.test(pw)) {
+  			alert("비밀번호는 숫자만 입력해주세요!");
+  			return;
+  		}
+  		
+  		if (!regExpName.test(phone)) {
+  			alert("연락처 입력을 확인해주세요!");
+  			return;
+  		}
+  		
+  		if (!regExpName.test(email)) {
+  			alert("이메일 입력을 확인해주세요!");
+  			return;
+  		}
+  		
+  		form.submit();
+  	}
+  </script>
   <body>
     <!-- HEADER -->
 
@@ -53,7 +92,11 @@
               class="p-4 p-md-5 border rounded-3 bg-light"
               action="./thanks.jsp"
               method="POST"
-            >
+			<p>아이디: <input type="text" name="id" /></p>
+			<p>비밀번호: <input type="password" name="pw" /></p>
+			<p><input type="submit" value="전송" /.></p>
+	       	>
+    
               <div class="form-floating mb-3">
                 <input
                   type="text"
